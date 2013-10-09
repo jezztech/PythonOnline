@@ -1,0 +1,63 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
+# enable debugging
+import cgitb
+import cgi
+cgitb.enable()
+
+print "Content-type: text/html"
+
+print """
+<html>
+
+<head><title>Find letter in word</title></head>
+
+<link rel="stylesheet" type="text/css" href="http://bsociable.org/css/style.css">
+
+<style>
+#output{
+overflow-y:scroll;
+width:100%;
+height:25%;
+font-weight:900;
+padding:2%;
+}
+body{padding:2%;}
+</style>
+
+<body>
+
+  <h3> Find letter in word </h3>
+"""
+
+form = cgi.FieldStorage()
+word = form.getvalue("word", "")
+letter = form.getvalue("letter", "")
+word = str(word)
+letter = str(letter)
+count = 0
+pos = 0
+
+
+for pos in range(0,len(word)):
+	if word[pos] == letter:
+		count = count + 1
+
+
+
+print """
+
+  <p>Output:</br> <div id="output"> """,count,""" </div></p>
+
+  <form method="post" action="">
+    <p>Enter a word: <input type="text" name="word"/></p>
+    <p>Enter a letter: <input type="text" name="letter"/></p>
+    <input type="submit">
+  </form>
+
+
+</body>
+
+</html>
+"""
